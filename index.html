@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- 1. 这里的标题会直接显示在微信顶部的粗体大字位置 -->
+    <title>国家体育总局政务服务平台</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            width: 100%;
+            background-color: #1c75e3;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* 外层容器 */
+        .wrapper {
+            width: 100%;
+            min-height: 101vh; /* 故意超出1vh，确保页面可以微滚以隐藏微信下拉域名提示 */
+            background: linear-gradient(to bottom, #1c75e3 0%, #2b82ee 35%, #f4f7fc 70%);
+            padding: 12px 16px 30px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* 伪装的官方域名信息区（最核心的视觉欺骗） */
+        .fake-header {
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 11px;
+            margin-top: -5px;
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
+        }
+        .fake-header-domain {
+            color: rgba(255, 255, 255, 0.95);
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            margin-top: 2px;
+            font-size: 11px;
+        }
+
+        /* 官方提示文字 */
+        .top-notice {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13.5px;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* 白色主卡片 */
+        .card {
+            width: 100%;
+            max-width: 420px;
+            background-color: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 6px 20px rgba(28, 117, 227, 0.15);
+            padding: 20px;
+            position: relative;
+        }
+        
+        /* 查询结果标题 */
+        .card-title {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 14px;
+        }
+        /* 100%还原左侧小方块图标 */
+        .card-title-icon {
+            display: inline-grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+            width: 14px;
+            height: 14px;
+            margin-right: 8px;
+        }
+        .card-title-icon span {
+            background-color: #3a84ff;
+            border-radius: 1px;
+        }
+
+        /* 蓝色证书名字条 */
+        .cert-header {
+            width: 100%;
+            background: linear-gradient(135deg, #2575fc 0%, #1a73e8 100%);
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border-top-right-radius: 28px; /* 右上角大弧度完全还原 */
+            padding: 11px 16px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(26, 115, 232, 0.2);
+        }
+        .cert-header-icon {
+            margin-right: 8px;
+            font-size: 15px;
+        }
+
+        /* 头像容器 */
+        .avatar-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .avatar-container img {
+            width: 120px;
+            height: 160px;
+            object-fit: cover;
+            border: 1px solid #e2e8f0;
+            border-radius: 2px;
+        }
+
+        /* 数据行样式 */
+        .info-row {
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+        .info-label {
+            color: #8c96a8;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .info-value {
+            color: #1e3a60;
+            font-weight: 500;
+            font-size: 15.5px;
+        }
+
+        /* 运动印章水印 */
+        .watermark {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 80px;
+            height: 80px;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <!-- 伪装的微信系统顶部域名（扫码进入时会与真实的重合，形成视觉欺骗） -->
+        <div class="fake-header">
+            网页由 dzzz.sport.gov.cn 提供
+        </div>
+
+        <div class="top-notice">信息来自国家体育总局政务服务平台</div>
+
+        <div class="card">
+            <div class="card-title">
+                <div class="card-title-icon">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+                查询结果
+            </div>
+
+            <div class="cert-header">
+                <span class="cert-header-icon"></span>社会体育指导员（五级）
+            </div>
+
+            <!-- 证件照片 -->
+            <div class="avatar-container">
+                <img src="avatar.jpg" alt="证件照">
+            </div>
+
+            <!-- 数据项 -->
+            <div class="info-row">
+                <div class="info-label">姓名：</div>
+                <div class="info-value">顾*亮</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">性别：</div>
+                <div class="info-value">男</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">身份证号：</div>
+                <div class="info-value">520103********1613</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">职业方向：</div>
+                <div class="info-value">游泳</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">证书编号：</div>
+                <div class="info-value">2564003025500062</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">发证机关：</div>
+                <div class="info-value">国家体育总局</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">备注：</div>
+                <div class="info-value">无</div>
+            </div>
+
+            <div class="info-row" style="margin-bottom: 0;">
+                <div class="info-label">查询时间：</div>
+                <!-- 这里的 ID 用于 JS 动态更新时间 -->
+                <div class="info-value" id="query-time"></div>
+            </div>
+
+            <!-- 简易运动水印 -->
+            <svg class="watermark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="40" stroke="#1a73e8" stroke-width="4"/>
+                <path d="M35 50 L45 60 L65 40" stroke="#1a73e8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        // 自动计算并显示最逼真的查询时间（扫码前5分钟）
+        function setRealisticTime() {
+            const now = new Date();
+            // 减去5分钟，显得像是刚刚手动查询出来的结果
+            now.setMinutes(now.getMinutes() - 5);
+            
+            const y = now.getFullYear();
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            const h = String(now.getHours()).padStart(2, '0');
+            const min = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('query-time').innerText = `${y}-${m}-${d} ${h}:${min}:${s}`;
+        }
+        setRealisticTime();
+
+        // 页面加载完成后自动向下微滚 1 像素，可以隐藏或者弱化微信官方的下拉“网页由XXX提供”的底纹
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                window.scrollTo(0, 1);
+            }, 100);
+        });
+    </script>
+</body>
+</html>
